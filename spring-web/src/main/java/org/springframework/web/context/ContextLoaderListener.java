@@ -20,6 +20,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
+ * 监听context加载消息，用于加载并启动Spring容器
+ * Spring提供，用于web环境使用spring框架入口，在容器配置信息中配置该监听者，容器在加载context时触发发送消息，该监听者
+ * 监听到消息，开始初始户Spring容器，执行顺序为：listener -> Filter -> Servlet.init
+ *
  * Bootstrap listener to start up and shut down Spring's root {@link WebApplicationContext}.
  * Simply delegates to {@link ContextLoader} as well as to {@link ContextCleanupListener}.
  *
@@ -96,6 +100,7 @@ public class ContextLoaderListener extends ContextLoader implements ServletConte
 
 
 	/**
+	 * 初始化web应用上下文的根容器，一个web应用对应一个Context上下文，而root容器则挂载在该Context之上
 	 * Initialize the root web application context.
 	 */
 	@Override
